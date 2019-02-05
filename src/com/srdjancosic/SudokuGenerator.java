@@ -1,6 +1,8 @@
 package com.srdjancosic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class SudokuGenerator {
     private int[][] slots;
@@ -26,11 +28,28 @@ public class SudokuGenerator {
                     int value = this.getRandomNumber(insertedValues);
                     this.slots[row][column] = value;
                     valid = this.isSlotValid(row, column);
-                    
+
                     if (valid){
                         insertedValues.add(value);
                     }
                     numberOfTries++;
+                }
+            }
+        }
+        this.hideRandomSlots(8);
+    }
+
+    private void hideRandomSlots(int maxHiddenSlots) {
+        int numberOfHiddenSlots = 0;
+        Random randomizer = new Random();
+        for (int row = 0; row < 4; row++) {
+            for (int column = 0; column < 4; column++) {
+                if (randomizer.nextInt(2) == 1){
+                    this.slots[row][column] = 0;
+                    numberOfHiddenSlots++;
+                    if (numberOfHiddenSlots == maxHiddenSlots) {
+                        return;
+                    }
                 }
             }
         }
