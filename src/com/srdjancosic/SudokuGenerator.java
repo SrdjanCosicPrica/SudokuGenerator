@@ -11,7 +11,7 @@ public class SudokuGenerator {
         this.randomizeSlots();
     }
 
-    private void randomizeSlots() {
+    public void randomizeSlots() {
         this.slots = new int[4][4];
         for (int row = 0; row < 4; row++) {
             ArrayList<Integer> insertedValues = new ArrayList<>();

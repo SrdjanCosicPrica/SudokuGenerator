@@ -2,11 +2,9 @@ package com.srdjancosic.commands;
 
 import com.srdjancosic.SudokuGenerator;
 
-public class HelpCommand implements Command {
+public class RandomizeCommand implements Command {
     @Override
     public void call(SudokuGenerator sudokuGenerator) {
-        System.out.println("" +
-            "quit: Quit the program"
-        );
+        sudokuGenerator.randomizeSlots();
     }
 }

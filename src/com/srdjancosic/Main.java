@@ -3,6 +3,7 @@ package com.srdjancosic;
 import com.srdjancosic.commands.Command;
 import com.srdjancosic.commands.HelpCommand;
 import com.srdjancosic.commands.QuitCommand;
+import com.srdjancosic.commands.RandomizeCommand;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -12,7 +13,8 @@ public class Main {
 
     private static Map<String, Command> choices = Map.of(
         "quit", new QuitCommand(),
-        "help", new HelpCommand()
+        "help", new HelpCommand(),
+        "randomize", new RandomizeCommand()
     );
 
     public static void main(String[] args) {
@@ -24,14 +26,14 @@ public class Main {
                 System.out.println(sudokuGenerator.toString());
                 System.out.println("Type \"help\" to see a list of commands");
             }
-            printInfo = awaitInput();
+            printInfo = awaitInput(sudokuGenerator);
         }
     }
 
-    private static boolean awaitInput() {
+    private static boolean awaitInput(SudokuGenerator sudokuGenerator) {
         String choice = scanner.nextLine();
         try {
-            choices.get(choice).call();
+            choices.get(choice).call(sudokuGenerator);
         } catch (NullPointerException ignored) {
             System.out.printf("Unrecognized command %s%n", choice);
         }
