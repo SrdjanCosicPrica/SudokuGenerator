@@ -16,19 +16,25 @@ public class Main {
     );
 
     public static void main(String[] args) {
+        SudokuGenerator sudokuGenerator = new SudokuGenerator();
         System.out.println("Welcome to Sudoku Generator");
+        boolean printInfo = true;
         while (true) {
-            System.out.println("Type \"help\" to see a list of commands");
-            awaitInput();
+            if (printInfo) {
+                System.out.println(sudokuGenerator.toString());
+                System.out.println("Type \"help\" to see a list of commands");
+            }
+            printInfo = awaitInput();
         }
     }
 
-    private static void awaitInput() {
+    private static boolean awaitInput() {
         String choice = scanner.nextLine();
         try {
             choices.get(choice).call();
         } catch (NullPointerException ignored) {
             System.out.printf("Unrecognized command %s%n", choice);
         }
+        return !choice.equals("help");
     }
 }
